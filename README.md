@@ -59,4 +59,4 @@ curl -XPOST localhost:8080/start-and-complete-migration -d '{
 }'
 ```
 
-
+You can find the documentation for the supported operations in the [pgroll docs](https://pgroll.com/docs/latest/operations/add_column).

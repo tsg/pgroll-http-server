@@ -51,6 +51,11 @@ func initHandler(cfg Config) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Received request for %s from %s", r.URL.Path, r.RemoteAddr)
 
+		if r.Method != http.MethodPost {
+			writeJSONResponse(w, false, "Method not allowed", http.StatusMethodNotAllowed, nil)
+			return
+		}
+
 		roll, err := NewRoll(context.Background(), cfg.PostgresURL, cfg.Schema)
 		if err != nil {
 			log.Printf("Failed to initialize pgroll: %v", err)
